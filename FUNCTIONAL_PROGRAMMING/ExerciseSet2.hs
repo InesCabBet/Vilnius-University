@@ -10,13 +10,13 @@
 module ExerciseSet2 where
 
 --- Exercise 1
-average:: [Float] -> Float
+average :: [Float] -> Float
 average [] = 0
 average numbers = sum numbers / fromIntegral(length numbers)
 
 --- Exercise 2
 --- Ex2 -> Recursion
-divides:: Integer -> [Integer]
+divides :: Integer -> [Integer]
 divides 0 = []
 divides number 
   | number > 0 = helper number 1
@@ -29,7 +29,7 @@ divides number
       | otherwise = helper n (i + 1)  
 
 --- Ex2 -> List comprehension
-dividesCom:: Integer -> [Integer]
+dividesCom :: Integer -> [Integer]
 dividesCom 0 = []
 dividesCom n 
   | n > 0 = [x | x <- [1 .. n], n `mod` x == 0]
@@ -41,3 +41,24 @@ isPrime n
   | n < 2 = False
   | otherwise = dividesCom n == [1, n]
 
+--- Exercise 3
+prefix :: String -> String -> Bool
+prefix string1 string2 
+  | length(string1) > length(string2) = error "First string must be shorter than second string. \nWe evaluate wether s1 is a prefix of s2."
+  | otherwise = take (length string1) string2 == string1
+
+--- Ex3 -> substring
+substring :: String -> String -> Bool
+substring _ [] = False
+substring string1 string2
+  | prefix string1 string2 = True
+  | otherwise = substring string1 (tail string2)
+
+--- Exercise 4
+permut :: [Integer] -> [Integer] -> Bool
+
+
+--- Exercise 5
+
+
+--- Exercise 6
