@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"); /* This is the Roboto text import from googlefonts */
+
+body {
+  font-family: Roboto;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.section1 {
+  background-color: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  gap: 40px;
+}
+.section1-left {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section1-header {
+  color: #f9faf8;
+  font-size: 48px;
+  font-weight: 900;
+}
+.section1-right .placeholder {
+  background-color: #6b7280;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+}
+
+.placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* o "contain" si prefieres que no recorte */
+  display: block;
+}
