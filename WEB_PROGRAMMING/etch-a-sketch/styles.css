@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: black;
+  padding: 20px;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
+
+button:hover{
+  transform: translateY(-2px);
+}
+
+button:active{
+  transform: translateY(0);
+}
+
+#blackMode {
+  background: #31343a;
+  color: white;
+}
+
+#colorRandom {
+  background: #31343a;
+  color: white;
+}
+
+#colorRandom:hover{
+  background: rgb(162, 126, 126);
+}
+
+#reset {
+  background: #31343a;
+  color: white;
+}
+
+#reset:hover {
+  background: rgb(115, 138, 115);
+}
+
+#changeSize {
+  background: #31343a;
+  color: white;
+}
+
+#changeSize:hover {
+  background: rgb(113, 113, 134);
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+#grid {
+  display: grid;
+  width: 500px;
+  height: 500px;
+  border: 2px solid #333;
+  background: white;
+}
+
+.celda {
+  border: 1px solid #e0e0e0;
+  transition: background-color 0.1s;
+}
+
+.celda:hover {
+  opacity: 0.8;
+}
+
+.info {
+  color: white;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.active {
+  box-shadow: 0 0 0 3px rgb(241, 217, 217);
+}
