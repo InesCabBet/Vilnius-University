@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"); /* This is the Roboto text import from googlefonts */
+
+body {
+  font-family: Roboto;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/*---------- HEADERS ---------------*/
+.header{
+  background-color: #1F2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.links {
+  padding-left: 375px;
+}
+
+a {
+  text-decoration: none;
+  color: #E5E7EB;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+.hero {
+  display: flex;
+  padding: 20px 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  color: #f9faf8;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  flex: 1;
+}
+
+/*---------- SECTION 1 - NAVY BLUE -----------------*/
+.section1 {
+  background-color: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  gap: 40px;
+}
+
+.section1-left {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section1-header {
+  color: #f9faf8;
+  font-size: 48px;
+  font-weight: 900;
+}
+
+.section1-text {
+  color:#E5E7EB;
+  font-size: 18px;
+}
+
+.signup-btn {
+  background-color: #3882F6;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.section1-right .placeholder {
+  background-color: #6b7280;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+}
+
+.placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* o "contain" si prefieres que no recorte */
+  display: block;
+}
+
+/*-------------SECTION 2 - SOME INFO ------------*/
+.section2 {
+  background-color: white;
+  display: flex;
+  flex-direction: column; /* apilar título y cajas */
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.section2-header {
+  color: #1f2937;
+  font-size: 36px;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px; /* espacio entre título y cajas */
+}
+
+.section2-boxes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap; /* para que se acomode en móvil */
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 140px;
+  text-align: center;
+}
+
+.imgborder {
+  border-radius: 8px;
+  border: 0.3em solid #3882f6;
+  width: 120px;
+  height: 120px;
+}
+
+.imgborder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* llena el contenedor */
+  border-radius: 6px; /* un poco menos que el borde exterior */
+  display: block;
+}
+
+.credits {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #6b7280;
+  text-align: center;
+}
+
+/*----------- SECTION 3 ----------*/
+.section3 {
+  background-color: #E5E7EB;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 40px;
+  margin-top: 80px;
+}
+
+.section3-text {
+  font-size: 36px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  color:#1F2937;
+  font-weight: 300;
+  font-style: italic;
+  max-width: 700px;
+}
+
+.section3-author {
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: right;
+}
+
+/*-------------SECTION 4-------------*/
+.section4 {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.section4-button {
+  background-color: #3882F6;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  max-width: 1000px;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-btn2 {
+  background-color: #3882F6;
+  border: 2px solid white;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/*---------------FOOTER----------*/
+.footer {
+  background-color: #1F2937;
+  display: flex;
+  color: #E5E7EB;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 18px;
+}
