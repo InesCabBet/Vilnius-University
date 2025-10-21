@@ -59,6 +59,7 @@ permut :: [Integer] -> [Integer] -> Bool
 
 
 --- Exercise 5
+capitalise :: String -> String
 
 
 --- Exercise 6

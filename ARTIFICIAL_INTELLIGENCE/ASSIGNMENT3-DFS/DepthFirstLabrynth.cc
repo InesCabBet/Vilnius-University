@@ -312,7 +312,7 @@ static RunResult runOnce(Maze mz, int x0, int y0, int variant, bool verbose) {
     int width = 1;
     while (total >= 10) { width++; total /= 10; }
     for (int i = 0; i < (int)ctx.traceLines.size(); ++i) {
-      std::cout << std::setw(width) << (i+1) << ") " << ctx.traceLines[i] << "\n";
+      std::cout << std::setw(9) << (i+1) << ") " << ctx.traceLines[i] << "\n";
     }
     ctx.callStack.pop_back();
     auto t1 = std::chrono::steady_clock::now();
@@ -351,28 +351,6 @@ int main() {
   } else if (variantStr == "V2" || variantStr == "v2" || variantStr == "2") {
     variant = 2;
     variantSuffix = "v2";
-  }
-  // Eliminar antes de hacer push
-  if (path == "input1.txt" && variant == 1){
-    std::cout << "Results written to output_input1_v1.txt" << "\n";
-    return 0;
-  } else if (path == "input1.txt" && variant == 2){
-    std::cout << "Results written to output_input1_v2.txt"<< "\n";
-    return 0;
-  }
-  if (path == "input2.txt" && variant == 1){
-    std::cout << "Results written to output_input2_v1.txt" << "\n";
-    return 0;
-  } else if (path == "input2.txt" && variant == 2){
-    std::cout << "Results written to output_input2_v2.txt"<< "\n";
-    return 0;
-  }
-  if (path == "input3.txt" && variant == 1){
-    std::cout << "Results written to output_input3_v1.txt" << "\n";
-    return 0;
-  } else if (path == "input3.txt" && variant == 2){
-    std::cout << "Results written to output_input3_v2.txt"<< "\n";
-    return 0;
   }
   Maze mz; int x0 = 1, y0 = 1;
   if (!loadMazeFromFile(path, mz, x0, y0)) {
