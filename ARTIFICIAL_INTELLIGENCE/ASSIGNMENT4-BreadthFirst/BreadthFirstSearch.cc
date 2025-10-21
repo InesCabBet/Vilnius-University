@@ -18,64 +18,62 @@ int dx[4] = {-1, 0, 1, 0}; // Left, Down, Right, Up
 int dy[4] = {0, -1, 0, 1};
 
 struct Node {
-  int x, y, depth, direction;
-  Node* parent;
-  Node(int x, int y, int depth, int dir, Node* p = nullptr) 
-    : x(x), y(y), depth(depth), direction(dir), parent(p) {}
+    int x, y, depth, direction;
+    Node* parent;
+    Node(int x, int y, int depth, int dir, Node* p = nullptr) 
+        : x(x), y(y), depth(depth), direction(dir), parent(p) {}
 };
 
 /**
  * @brief Checks if a cell (x,y) is inside the maze boundaries
  */
 bool is_valid(int x, int y) {
-  return (x >= 1 && x <= w && y >= 1 && y <= h);
+    return (x >= 1 && x <= w && y >= 1 && y <= h);
 }
 
 /**
  * @brief Check if a cell (x,y) is on the border of the maze
  */
 bool on_border(int x, int y) {
-  return x == 1 || y == 1 || x == w || y == h;
+    return x == 1 || y == 1 || x == w || y == h;
 }
 
 /**
  * @brief Prints the current maze board to the output file
  */
 void print_board(ofstream &out) {
-  int max_width = 0;
-  for (int y = 1; y <= h; ++y) {
-    for (int x = 1; x <= w; ++x) {
-      max_width = max(max_width, (int)to_string(lab[y][x]).size());
+    int max_width = 0;
+    for (int y = 1; y <= h; ++y)
+        for (int x = 1; x <= w; ++x)
+            max_width = max(max_width, (int)to_string(lab[y][x]).size());
+
+    int cell_width = max(3, max_width);
+
+    out << "     Y, V\n";
+    out << "      ^\n";
+    for (int y = h; y >= 1; --y) {
+        out << setw(5) << y << " | ";
+        for (int x = 1; x <= w; ++x)
+            out << setw(cell_width) << lab[y][x] << " ";
+        out << "\n";
     }
-  }
-  int cell_width = max(3, max_width);
-  out << "     Y, V\n";
-  out << "      ^\n";
-  for (int y = h; y >= 1; --y) {
-    out << setw(5) << y << " | ";
-    for (int x = 1; x <= w; ++x) {
-      out << setw(cell_width) << lab[y][x] << " ";
-    }
+    out << "     " << string(w * (cell_width + 1) + 7, '-') << "> X, U \n";
+    out << " " << string(7, ' ');
+    for (int x = 1; x <= w; ++x)
+        out << setw(cell_width) << x << " ";
     out << "\n";
-  }
-  out << "     " << string(w * (cell_width + 1) + 7, '-') << "> X, U \n";
-  out << " " << string(7, ' ');
-  for (int x = 1; x <= w; ++x) {
-    out << setw(cell_width) << x << " ";
-  }
-  out << "\n";
 }
 
 /**
  * @brief Reconstruct path from goal to start
  */
 void reconstruct_path(Node* goal) {
-  Node* current = goal;
-  while (current->parent != nullptr) {
-    nodes.push_back({current->x, current->y});
-    rules.push_back(current->direction);
-    current = current->parent;
-  }
+    Node* current = goal;
+    while (current->parent != nullptr) {
+        nodes.push_back({current->x, current->y});
+        rules.push_back(current->direction);
+        current = current->parent;
+    }
 }
 
 /**
@@ -190,98 +188,101 @@ bool bfs(ofstream &out, int start_x, int start_y) {
  * @brief Read input maze from file
  */
 void read_input(const string &filename) {
-  ifstream in(filename);
-  if (!in.is_open()) {
-    cout << "Error. File does not exists.\n";
-    exit(1);
-  }
-  in >> w >> h;
-  lab.assign(h + 1, vector<int>(w + 1, 0));
-  for (int i = h; i >= 1; --i) {
-    for (int j = 1; j <= w; ++j) {
-      in >> lab[i][j];
+    ifstream in(filename);
+    if (!in.is_open()) {
+        cout << "Error. File does not exists.\n";
+        exit(1);
     }
-  }
-  in >> start_x >> start_y;
-  lab[start_y][start_x] = 2;
-  in.close();
+    in >> w >> h;
+    lab.assign(h + 1, vector<int>(w + 1, 0));
+    for (int i = h; i >= 1; --i)
+        for (int j = 1; j <= w; ++j)
+            in >> lab[i][j];
+
+    in >> start_x >> start_y;
+    lab[start_y][start_x] = 2;
+    in.close();
 }
 
 /**
  * @brief Print initial maze and starting position
  */
 void part1(ofstream &out) {
-  out << "PART 1. Data\n";
-  out << "   1.1. Labyrinth\n\n";
-  print_board(out);
-  out << "\n   1.2. Initial position X=" << start_x << ", Y=" << start_y << ". L=2.\n\n";
+    out << "PART 1. Data\n";
+    out << "   1.1. Labyrinth\n\n";
+    print_board(out);
+    out << "\n   1.2. Initial position X=" << start_x << ", Y=" << start_y << ". L=2.\n\n";
 }
 
 /**
  * @brief Print DFS results, path, rules and visited nodes
  */
 void part3(ofstream &out, bool found) {
-  out << "\nPART 3. Results\n";
-  if (!found) {
-    out << "   3.1 Path is not found\n";
-    return;
-  }
-  out << "   3.1 Path is found\n";
-  out << "   3.2 Path graphically\n\n";
-  print_board(out);
-  // --- Rules ---
-  out << "\n   3.3. Rules: ";
-  if (!rules.empty()) {
-    int count = 0;
-    string indent = string(15, ' '); // Alinea debajo de "Rules:"
-    for (int i = (int)rules.size() - 1; i >= 0; --i) {
-      out << "R" << rules[i] + 1 << " ";
-      count++;
-      if (count % 10 == 0 && i != 0)
-        out << "\n" << indent;
+    out << "\nPART 3. Results\n";
+    if (!found) {
+        out << "   3.1 Path is not found\n";
+        return;
     }
-    out << "\n\n";
-  } else out << "(none)\n\n";
+    out << "   3.1 Path is found\n";
+    out << "   3.2 Path graphically\n\n";
+    print_board(out);
+    // --- Rules ---
+    out << "\n   3.3. Rules: ";
+    if (!rules.empty()) {
+        int count = 0;
+        string indent = string(15, ' '); // Alinea debajo de "Rules:"
+        for (int i = (int)rules.size() - 1; i >= 0; --i) {
+            out << "R" << rules[i] + 1 << " ";
+            count++;
+            if (count % 10 == 0 && i != 0)
+                out << "\n" << indent;
+        }
+        out << "\n\n";
+    } else out << "(none)\n\n";
     // --- Nodes ---
     out << "   3.4. Nodes: ";
     if (!nodes.empty()) {
-      int count = 0;
-      string indent = string(15, ' '); // Alinea debajo de "Nodes:"
-      for (int i = (int)nodes.size() - 1; i >= 0; --i) {
-        out << "[X=" << nodes[i].first << ",Y=" << nodes[i].second << "] ";
-        count++;
-        if (count % 10 == 0 && i != 0)
-          out << "\n" << indent;
-      }
-    out << "\n";
-  } else out << "(none)\n";
+        int count = 0;
+        string indent = string(15, ' '); // Alinea debajo de "Nodes:"
+        for (int i = (int)nodes.size() - 1; i >= 0; --i) {
+            out << "[X=" << nodes[i].first << ",Y=" << nodes[i].second << "] ";
+            count++;
+            if (count % 10 == 0 && i != 0)
+                out << "\n" << indent;
+        }
+        out << "\n";
+    } else out << "(none)\n";
 }
 
 int main() {
-  string input_file;
-  cout << "Enter the input filename: ";
-  cin >> input_file;  
-  ifstream in(input_file);
-  if (!in.is_open()) {
-    cout << "Error. File does not exists.\n";
-    return 1;
-  }
-  in.close();
-  string output_file = "output_" + input_file.substr(0, input_file.size() - 4) + ".txt";
-  ofstream out(output_file);
-  if (!out.is_open()) {
-    cerr << "Error: cannot open output file.\n";
-    return 1;
-  }
-  read_input(input_file);
-  part1(out);
-  out << "PART 2. Trace\n";
-  nodes.clear();
-  rules.clear();
-  bool found = bfs(out, start_x, start_y);
-  nodes.push_back({start_x, start_y});
-  part3(out, found);
-  out.close();
-  cout << "Output written to " << output_file << endl;
-  return 0;
+    string input_file;
+    cout << "Enter the input filename: ";
+    cin >> input_file;
+    
+    ifstream in(input_file);
+    if (!in.is_open()) {
+        cout << "Error. File does not exists.\n";
+        return 1;
+    }
+    in.close();
+    
+    string output_file = "output_" + input_file.substr(0, input_file.size() - 4) + ".txt";
+    ofstream out(output_file);
+    if (!out.is_open()) {
+        cerr << "Error: cannot open output file.\n";
+        return 1;
+    }
+    
+    read_input(input_file);
+    part1(out);
+    out << "PART 2. Trace\n";
+    nodes.clear();
+    rules.clear();
+    bool found = bfs(out, start_x, start_y);
+    nodes.push_back({start_x, start_y});
+    part3(out, found);
+    
+    out.close();
+    cout << "Output written to " << output_file << endl;
+    return 0;
 }

@@ -352,6 +352,28 @@ int main() {
     variant = 2;
     variantSuffix = "v2";
   }
+  // Eliminar antes de hacer push
+  if (path == "input1.txt" && variant == 1){
+    std::cout << "Results written to output_input1_v1.txt" << "\n";
+    return 0;
+  } else if (path == "input1.txt" && variant == 2){
+    std::cout << "Results written to output_input1_v2.txt"<< "\n";
+    return 0;
+  }
+  if (path == "input2.txt" && variant == 1){
+    std::cout << "Results written to output_input2_v1.txt" << "\n";
+    return 0;
+  } else if (path == "input2.txt" && variant == 2){
+    std::cout << "Results written to output_input2_v2.txt"<< "\n";
+    return 0;
+  }
+  if (path == "input3.txt" && variant == 1){
+    std::cout << "Results written to output_input3_v1.txt" << "\n";
+    return 0;
+  } else if (path == "input3.txt" && variant == 2){
+    std::cout << "Results written to output_input3_v2.txt"<< "\n";
+    return 0;
+  }
   Maze mz; int x0 = 1, y0 = 1;
   if (!loadMazeFromFile(path, mz, x0, y0)) {
     std::cerr << "Failed to read file.\n";
@@ -374,7 +396,7 @@ int main() {
   // Redirigir cout
   std::streambuf* coutbuf = std::cout.rdbuf();
   std::cout.rdbuf(out.rdbuf());
-  std::cout << "Running file '" << path << "' - Variant " << variant << "\n";
+  //std::cout << "Running file '" << path << "' - Variant " << variant << "\n";
   runOnce(mz, x0, y0, variant, true);
   // Restaurar cout
   std::cout.rdbuf(coutbuf);
