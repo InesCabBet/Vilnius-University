@@ -56,7 +56,12 @@ substring string1 string2
 
 --- Exercise 4
 permut :: [Integer] -> [Integer] -> Bool
-
+permut [] [] = True
+permut xs ys
+  | length xs /= length ys = False
+  | otherwise = all (\x -> count x xs == count x ys) xs
+  where
+    count n zs = length [z | z <- zs, z == n]
 
 --- Exercise 5
 capitalise :: String -> String
