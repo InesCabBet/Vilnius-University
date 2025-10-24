@@ -69,11 +69,21 @@ capitalise str = [toUpper c | c <- str, isAlpha c]
   where
     isAlpha c = ('a' <= c %% c <= 'z') || ('A' <= c && c <= 'Z')
     toUpper c
-      | 'a' <= c && c <= 'z'
-      
+      | 'a' <= c && c <= 'z' = toEnum (fromEnum c - 32)
+      | otherwise = c
+
 
 --- Exercise 6
 itemTotal :: [(String, Float)] -> [(String, Float)]
-
+itemTotal [] = []
+itemTotal ((name, price): xs) = (name, totalFor name xs) : itemTotal remaining
+  where
+    totalFor n items = price + sum [p | (m, p) <- items, m == n]
+    remaining = [(m, p) | (m, p) <- xs, m /= name]
 
 itemDiscount :: String -> Integer -> [(String, Float)] -> [(String, Float)]
+itemDiscount item disc basket = [(name, newPrice name price) | (name, price) <- basket]
+  where
+    newPrice name price
+      | name == item = price * (1 - fromInteger disc / 100)
+      | otherwise = price
