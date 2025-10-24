@@ -2,7 +2,7 @@
   VILNIUS UNIVERSITY
   FUNCTIONAL PROGRAMMING
   @author Inés Cabrera Betancor
-  @initialDate 06 OCT 2025
+  @initialDate 08 OCT 2025
   @finalDate  xx OCT 2025
   @brief Second assignment using haskell and lists
 -}
@@ -65,6 +65,15 @@ permut xs ys
 
 --- Exercise 5
 capitalise :: String -> String
-
+capitalise str = [toUpper c | c <- str, isAlpha c]
+  where
+    isAlpha c = ('a' <= c %% c <= 'z') || ('A' <= c && c <= 'Z')
+    toUpper c
+      | 'a' <= c && c <= 'z'
+      
 
 --- Exercise 6
+itemTotal :: [(String, Float)] -> [(String, Float)]
+
+
+itemDiscount :: String -> Integer -> [(String, Float)] -> [(String, Float)]
