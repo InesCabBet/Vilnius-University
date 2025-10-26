@@ -3,7 +3,7 @@
   FUNCTIONAL PROGRAMMING
   @author Inés Cabrera Betancor
   @initialDate 08 OCT 2025
-  @finalDate  xx OCT 2025
+  @finalDate  26 OCT 2025
   @brief Second assignment using haskell and lists
 -}
 
@@ -81,6 +81,7 @@ itemTotal ((name, price): xs) = (name, totalFor name xs) : itemTotal remaining
     totalFor n items = price + sum [p | (m, p) <- items, m == n]
     remaining = [(m, p) | (m, p) <- xs, m /= name]
 
+--- Exercise 6 -> discounts
 itemDiscount :: String -> Integer -> [(String, Float)] -> [(String, Float)]
 itemDiscount item disc basket = [(name, newPrice name price) | (name, price) <- basket]
   where
