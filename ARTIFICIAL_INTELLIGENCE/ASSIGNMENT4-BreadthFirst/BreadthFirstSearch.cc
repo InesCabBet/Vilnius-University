@@ -3,7 +3,7 @@
  * ARTIFICIAL INTELLIGENCE : CLASSICAL PRINCIPLES
  * @author INES CABRERA BETANCOR
  * @date 04 OCT 2025 
- * @brief Assignment 3 - BFS Version with Wave Format
+ * @brief Assignment 4 - BFS Version with Wave Format
  */
 
 #include <bits/stdc++.h>
