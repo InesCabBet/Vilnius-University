@@ -1,1 +1,177 @@
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+/* DRAWER (SIDEBAR) */
+.drawer {
+  background-color: #1992d4;
+  color: white;
+  grid-row: 1 / 3;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.drawer .dashboard {
+  margin-bottom: 30px;
+}
+
+.drawer .menuItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.drawer .menuItem img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.drawer .menuItem h1 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.drawer .menuItem:nth-child(8) {
+  margin-top: 30px;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: white;
+  padding: 20px 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1;
+}
+
+/* Top section of navbar */
+.topNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  max-width: 700px;
+}
+
+.search .menuItem img {
+  width: 24px;
+  height: 24px;
+}
+
+.search input[type="text"] {
+  flex: 1;
+  padding: 8px 15px;
+  border: none;
+  background-color: #e2e8f0;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.search input[type="text"]:focus {
+  outline: 2px solid #1992d4;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.account .menuItem img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  background-color: #f59e0b;
+  border-radius: 50%;
+}
+
+.account .name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Bottom section of navbar */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile .avatar {
+  width: 70px;
+  height: 70px;
+}
+
+.profile-name .greeting {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.profile-name .name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-name .username {
+  font-weight: 400;
+}
+
+.buttons {
+  display: flex;
+  gap: 25px;
+}
+
+.btn {
+  background-color: #1992d4;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #1576b0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
