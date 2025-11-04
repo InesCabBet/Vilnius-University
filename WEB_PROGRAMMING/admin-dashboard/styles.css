@@ -110,6 +110,9 @@ body {
   width: 45px;
   height: 45px;
   background-color: #f59e0b;
+  background-image: url("https://github.com/InesCabBet.png");
+  background-size: cover;
+  background-position: center;
   border-radius: 50%;
 }
 
