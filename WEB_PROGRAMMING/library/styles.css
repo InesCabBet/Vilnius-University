@@ -1,0 +1,47 @@
+body {
+  background-color: rgb(60, 59, 59);
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: rgb(60, 59, 59);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.title {
+  font-size: 40px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.new-book {
+  background-color: rgb(196, 78, 78);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.new-book:hover{
+  transform: scale(1.10);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 25px;
+}
