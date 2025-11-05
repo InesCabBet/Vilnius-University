@@ -148,3 +148,49 @@ body {
   background-color: rgb(110, 0, 0);
   transform: scale(1.05);
 }
+
+.book-form {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.book-form h2 {
+  margin: 0;
+  font-size:  1.4 rem;
+  text-align: center;
+  color: #fff;
+}
+
+.book-form label {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.book-form input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+.book-form button {
+  background-color: rgb(196, 78, 78);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.book-form button:hover {
+  background-color: rgb(165, 60, 60);
+}
