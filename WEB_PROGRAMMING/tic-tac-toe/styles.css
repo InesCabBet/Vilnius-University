@@ -1,0 +1,16 @@
+body {
+  background-color: rgb(37, 90, 63);
+  justify-content: center;
+  align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 40px;
+  padding: 30px;
+  justify-content: center;
+}
