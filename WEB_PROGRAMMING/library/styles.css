@@ -43,5 +43,108 @@ body {
 .layout {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  background-color: rgba(255, 255, 255, 0.675);
   gap: 25px;
+  width: 100%;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.book {
+  background-color: rgba(83, 104, 152, 0.8); /* fondo azulado translúcido */
+  color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 15px 10px;
+  width: 160px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Efecto al pasar el ratón */
+.book:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Imagen del libro */
+.book img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover; /* recorta sin deformar */
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Título del libro */
+.book-title {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+
+/* Autor */
+.book-author {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  margin: 2px 0;
+}
+
+/* Páginas */
+.book-pages {
+  font-size: 0.9rem;
+  color: #d4d4d4;
+  margin: 5px 0 10px;
+}
+
+/* Botón de estado (Unread/Read) */
+.book-status {
+  background-color: rgb(196, 78, 78); /* rojo */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 80%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.book-status:hover {
+  background-color: rgb(165, 60, 60);
+  transform: scale(1.05);
+}
+
+/* Estado leído (por JS cambiará a esta clase) */
+.book-status.read {
+  background-color: rgb(67, 167, 67); /* verde */
+}
+
+.book-status.read:hover {
+  background-color: rgb(52, 138, 52);
+}
+
+/* Botón delete */
+.delete {
+  background-color: rgb(150, 0, 0);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 80%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete:hover {
+  background-color: rgb(110, 0, 0);
+  transform: scale(1.05);
 }
