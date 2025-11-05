@@ -191,6 +191,11 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.book-form button:hover {
-  background-color: rgb(165, 60, 60);
+.book-form button[type="submit"] {
+  background-color: rgb(98, 205, 81);
+}
+
+.book-form button#cancel {
+  background-color: rgb(196, 78, 78);
+  margin-left: 10px;
 }

@@ -24,86 +24,87 @@ const library = [
 
 document.addEventListener("DOMContentLoaded", () => {
   const layout = document.querySelector(".layout");
-  layout.addEventListener("click", (event) => {
-    if(event.target.classList.contains("delete")){
-      const bookCard = event.target.closest(".book");
-      if (bookCard){
-        bookCard.remove();
-      }
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const layout = document.querySelector(".layout");
-  layout.addEventListener("click", (event) => {
-    if(event.target.classList.contains("book-status")){
-      const button = event.target;
-      if(button.textContent == "Unread"){
-        button.textContent = "Read";
-        button.classList.add("read");
-      } else {
-        button.textContent = "Unread";
-        button.classList.remove("read");
-      }
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".book-form");
-  const layout = document.querySelector(".layout");
   const newBookButton = document.querySelector(".new-book");
-  // Show / hide the form
-  newBookButton.addEventListener("click", () => {
-    form.style.display = form.style.display === "flex" ? "none" : "flex";
-  });
-  // Handle form submission
-  form.addEventListener("submit", (event) => {
-    event.preventDefault(); // stop page reload
-    // Get the values
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const pages = document.getElementById("pages").value;
-    const image = document.getElementById("image").value;
-    // Create a new book card
+  const cancelButton = document.getElementById("cancel");
+  const modal = document.querySelector(".modal") || null; // solo si usas popup modal
+
+  //Render inicial desde el array library
+  function renderLibrary() {
+    layout.innerHTML = ""; // limpia por si acaso
+    library.forEach((book) => addBookToLayout(book));
+  }
+
+  // Crea una tarjeta de libro
+  function addBookToLayout(book) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book");
     bookCard.innerHTML = `
-      <img src="${image}" alt="${title}"/>
-      <p class="book-title">${title}</p>
-      <p class="book-author">${author}</p>
-      <p class="book-pages">${pages}</p>
-      <button class="book-status">Unread</button>
-      <button class="delete">Delete</button>
-    `;
-    // Add it to the layout
+      <img src="${book.image}" alt="${book.title}"/>
+      <p class="book-title">${book.title}</p>
+      <p class="book-author">${book.author}</p>
+      <p class="book-pages">${book.pages}</p>
+      <button class="book-status ${book.read ? "read" : ""}">
+        ${book.read ? "Read" : "Unread"}
+      </button>
+      <button class="delete">Delete</button>`;
     layout.appendChild(bookCard);
-    // Reset form
-    form.reset();
-    form.style.display = "none"; // hide again after submit
+  }
+
+  //Mostrar / ocultar formulario o modal
+  newBookButton.addEventListener("click", () => {
+    if (modal) {
+      modal.style.display = "flex";
+    } else {
+      form.style.display = form.style.display === "flex" ? "none" : "flex";
+    }
   });
 
-  // Make delete buttons work for new books too
+  //Botón cancelar
+  cancelButton.addEventListener("click", () => {
+    form.reset();
+    if (modal) modal.style.display = "none";
+    else form.style.display = "none";
+  });
+
+  //Enviar formulario
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const newBook = {
+      title: document.getElementById("title").value,
+      author: document.getElementById("author").value,
+      pages: document.getElementById("pages").value,
+      image: document.getElementById("image").value,
+      read: false,
+    };
+
+    // Añadir a la biblioteca y al DOM
+    library.push(newBook);
+    addBookToLayout(newBook);
+
+    // Reset y cerrar form
+    form.reset();
+    if (modal) modal.style.display = "none";
+    else form.style.display = "none";
+  });
+
+  //Delegación de eventos para botones dentro del grid
   layout.addEventListener("click", (event) => {
+    // Eliminar libro
     if (event.target.classList.contains("delete")) {
       event.target.closest(".book").remove();
+      return;
     }
+
+    // Cambiar estado Read/Unread
     if (event.target.classList.contains("book-status")) {
       const button = event.target;
-      if (button.textContent === "Unread") {
-        button.textContent = "Read";
-        button.classList.add("read");
-      } else {
-        button.textContent = "Unread";
-        button.classList.remove("read");
-      }
+      const isRead = button.textContent === "Unread";
+      button.textContent = isRead ? "Read" : "Unread";
+      button.classList.toggle("read", isRead);
     }
   });
+
+  renderLibrary();
 });
 
-const cancelButton = document.getElementById("cancel");
-cancelButton.addEventListener("click", () => {
-  form.reset();              // clear inputs
-  form.style.display = "none"; // hide form again
-});
