@@ -19,6 +19,33 @@ const library = [
     pages: 210,
     image: "https://thumb.knygos-static.lt/lwR-YGTaLQz-rf0c-csYcHurP9Q=/fit-in/0x801/images/books/1166468/41mjx6yzfel--sx324-bo1-204-203-200-.jpg",
     read: false
+  },{
+    title: "Harry Potter",
+    author: "JK Rowling",
+    pages: 408,
+    image: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1627042661i/58613224.jpg",
+    read: false
+  },
+  {
+    title: "to kill a mockingbird",
+    author: "Harper Lee",
+    pages: 293,
+    image: "https://m.media-amazon.com/images/I/81aY1lxk+9L._AC_UF1000,1000_QL80_.jpg",
+    read: true
+  },
+  {
+    title: "Le petit prince",
+    author: "Antoine de Saint-Exupéry",
+    pages: 50,
+    image: "https://m.media-amazon.com/images/I/71IF1ngy57L._AC_UF1000,1000_QL80_.jpg",
+    read: true
+  },
+  {
+    title: "Divergent",
+    author: "Veronica Roth",
+    pages: 516,
+    image: "https://online.fliphtml5.com/jiqdt/peqd/files/large/1.webp?1605597096&1605597096",
+    read: true
   }
 ];
 
