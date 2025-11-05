@@ -33,3 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const layout = document.querySelector(".layout");
+  layout.addEventListener("click", (event) => {
+    if(event.target.classList.contains("book-status")){
+      const button = event.target;
+      if(button.textContent == "Unread"){
+        button.textContent = "Read";
+        button.classList.add("read");
+      } else {
+        button.textContent = "Unread";
+        button.classList.remove("read");
+      }
+    }
+  });
+});
