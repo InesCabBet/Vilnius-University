@@ -1,0 +1,15 @@
+Inés Cabrera. Vilnius University, Computer Science.
+Test 3. Čyras vs. Negnevitsky; Negnevitsky wins
+1) Rules
+Z D
+D C
+C B
+B A
+G A
+Z G
+
+2) Facts
+A
+
+3) Goal
+Z
