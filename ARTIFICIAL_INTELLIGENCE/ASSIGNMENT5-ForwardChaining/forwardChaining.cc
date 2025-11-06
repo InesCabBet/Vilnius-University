@@ -33,6 +33,16 @@ class ForwardChaining {
     }
     return result;
   }
+  std::string vectorToString(const std::vector<std::string> &vector) const {
+    std::string result;
+    for (size_t i = 0; i < vector.size(); i++){
+      result += vector[i];
+      if (i < vector.size() - 1){
+        result += ", ";
+      }
+    }
+    return result;
+  }
 };
 
 #endif
