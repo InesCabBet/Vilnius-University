@@ -3,16 +3,10 @@
  * ARTIFICIAL INTELLIGENCE : CLASSICAL PRINCIPLES
  * @author INES CABRERA BETANCOR
  * @date 02 NOV 2025 
- * @brief Assignment 5 - Forward Chaining
+ * @brief Assignment 5 - Forward Chaining main program
  */
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <set>
-#include <string>
-#include <algorithm>
+#include "Rule.cc"
 
 /**
  * @brief Function to trim a string
