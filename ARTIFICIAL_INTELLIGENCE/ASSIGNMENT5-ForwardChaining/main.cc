@@ -8,8 +8,7 @@
 
 #include "Rule.cc"
 #include "forwardChaining.cc"
-#include <sstream>
-#include <iostream>
+#include "FileParser.cc"
 
 int main() {
   std::string filename;
@@ -20,5 +19,20 @@ int main() {
   std::string goal;
   std::string studentInfo;
   std::string testName;
-  //ForwardChaining fc(rules, facts, goal, studentInfo, testName);
+  if (!FileParser::parseFile(filename, rules, facts, goal, studentInfo, testName)) {
+    std::cerr << "Error. Failed to parse file" << std::endl;
+    return 1;
+  }
+  ForwardChaining fc(rules, facts, goal, studentInfo, testName);
+  fc.solve();
+  std::string outputFile = "output_" + filename;
+  std::ofstream out (outputFile);
+  if (!out.is_open()) {
+    std::cerr << "Error. Cannot open output file " << outputFile << std::endl;
+    return 1;
+  }
+  std::streambuf *coutBuf = std::cout.rdbuf();
+  std::cout.rdbuf(out.rdbuf());
+  std::cout << "\nOutput saved to " << outputFile << std::endl;
+  return 0;
 }
