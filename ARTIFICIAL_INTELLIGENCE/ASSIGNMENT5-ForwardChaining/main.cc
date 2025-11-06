@@ -9,6 +9,7 @@
 #include "Rule.cc"
 #include "forwardChaining.cc"
 #include <sstream>
+#include <iostream>
 
 /**
  * @brief Function to trim a string
@@ -39,4 +40,16 @@ std::vector<std::string> split (const std::string &str, char delimiter) {
     }
   }
   return elems;
+}
+
+int main() {
+  std::string filename;
+  std::cout << "Enter input filename: ";
+  getline(std::cin, filename);
+  std::vector<Rule> rules;
+  std::vector<std::string> facts;
+  std::string goal;
+  std::string studentInfo;
+  std::string testName;
+  //ForwardChaining fc(rules, facts, goal, studentInfo, testName);
 }

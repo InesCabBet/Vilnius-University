@@ -21,7 +21,18 @@ class ForwardChaining {
   std::vector<std::string> trace;
   std::string studentInfo;
   std::string testName;
-  
+  std::string setToString(const std::set<std::string> &set) const {
+    std::string result;
+    bool first = true;
+    for (const auto &item : set) {
+      if (!first) {
+        result += ", ";
+      }
+      result += item;
+      first += false;
+    }
+    return result;
+  }
 };
 
 #endif
