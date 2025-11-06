@@ -1,0 +1,11 @@
+Inés Cabrera. Vilnius University, Computer Science.
+Test 5. No path
+1) Rules
+B A
+Z C
+
+2) Facts
+A
+
+3) Goal
+Z
