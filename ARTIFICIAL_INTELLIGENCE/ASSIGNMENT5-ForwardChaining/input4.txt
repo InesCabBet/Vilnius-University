@@ -1,0 +1,15 @@
+Inés Cabrera. Vilnius University, Computer Science.
+Test 4. The goal in the facts
+1) Rules
+Z D
+D C
+C B
+B A
+G A
+Z G
+
+2) Facts
+A
+
+3) Goal
+A
