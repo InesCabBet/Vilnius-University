@@ -3,7 +3,7 @@
  * ARTIFICIAL INTELLIGENCE : CLASSICAL PRINCIPLES
  * @author INES CABRERA BETANCOR
  * @date 02 NOV 2025 
- * @brief Assignment 5 - Forward Chaining main program
+ * @brief Assignment 5 - Forward Chaining fc class
  */
 
 #include "Rule.cc"
