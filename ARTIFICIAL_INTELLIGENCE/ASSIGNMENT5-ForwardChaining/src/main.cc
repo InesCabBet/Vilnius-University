@@ -8,7 +8,8 @@
 
 #include "Rule.cc"
 #include "forwardChaining.cc"
-#include "FileParser.cc"
+#include "FileParser.h"
+#include <fstream>
 
 int main() {
   std::string filename;
