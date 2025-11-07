@@ -1,4 +1,4 @@
-Inés Cabrera. Vilnius University, Computer Science.
+Ines Cabrera. Vilnius University, Computer Science.
 Test 1. Initial fact on the right-hand side
 1) Rules
 L A         // R1: A -> L. Comments.
