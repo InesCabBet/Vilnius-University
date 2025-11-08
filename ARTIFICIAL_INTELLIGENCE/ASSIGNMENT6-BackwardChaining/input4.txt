@@ -1,0 +1,14 @@
+Inés Cabrera Betancor. Vilnius University, Computer Science.
+Test 4. A cycle and a failed branch
+1) Rules
+Z A
+A B
+C T
+B A C
+B T
+
+2) Facts
+T
+
+3) Goal
+Z
