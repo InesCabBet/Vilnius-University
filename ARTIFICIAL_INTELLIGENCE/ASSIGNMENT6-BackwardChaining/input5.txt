@@ -1,0 +1,17 @@
+Inés Cabrera Betancor. Vilnius University, Computer Science.
+Test 5. Graph – short path
+1) Rules
+G E
+B F
+Z G
+G A
+B A
+C B
+D C
+Z D
+
+2) Facts
+A
+
+3) Goal
+Z
