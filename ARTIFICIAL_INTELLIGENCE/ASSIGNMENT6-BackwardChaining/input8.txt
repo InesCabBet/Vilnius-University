@@ -1,0 +1,11 @@
+Inés Cabrera Betancor. Vilnius University, Computer Science.
+Test 8. The goal among facts – empty path
+1) Rules
+Z C D
+Y C E
+
+2) Facts
+C D
+
+3) Goal
+C

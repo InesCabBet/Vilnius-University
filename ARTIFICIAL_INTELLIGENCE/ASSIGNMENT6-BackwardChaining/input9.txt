@@ -1,0 +1,14 @@
+Inés Cabrera Betancor. Vilnius University, Computer Science.
+Test 9. Negnevitsky’s example
+1) Rules
+M K
+Z M N
+Z F B
+F C D
+D A
+
+2) Facts
+A B C
+
+3) Goal
+Z
