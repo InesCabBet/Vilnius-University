@@ -155,5 +155,31 @@ bool BackwardChaining::solve() {
 }
 
 void BackwardChaining::printResults() {
-  
+  for (const auto &line : trace) {
+    std::cout << line;
+  }
+  std::cout << "\nPART 3. Results\n";
+  if (initialFacts.count(goal)  && finalPath.empty()) {
+    std::cout << "\tGoal " << goal << " among facts. Empty path.\n";
+    return;
+  }
+  bool achieved = !finalPath.empty();
+  if (achieved) {
+    std::cout << "\t1) Goal " << goal << " achieved.\n";
+    std::vector<std::string> uniquePath;
+    std::set<std::string> seen;
+    for (const auto &r : finalPath) {
+      if (!seen.count(r)) {
+        uniquePath.push_back(r);
+        seen.insert(r);
+      }
+    }
+    std::cout << "\t2) Path: ";
+    for (size_t i = 0; uniquePath.size(); i++){
+      std::cout << uniquePath[i] << (i + 1 < uniquePath.size() ? ", " : ".");
+    }
+    std::cout << std::endl;
+  } else {
+    std::cout << "\tGoal not achieved. The path does not exist.\n";
+  }
 }
