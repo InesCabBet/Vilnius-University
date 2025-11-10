@@ -132,3 +132,28 @@ bool BackwardChaining::proveGoal(const std::string &currentGoal, int depth, std:
   }
   return false;
 }
+
+bool BackwardChaining::solve() {
+  trace.push_back("PART 1. DATA\n\n");
+  trace.push_back("    1) Rules:\n");
+  for (size_t i = 0; i < rules.size(); ++i) {
+    trace.push_back("       " + rules[i].toString() + "\n");
+  }
+  {
+    std::vector<std::string> init(initialFactsOrdered.begin(), initialFactsOrdered.end());
+    trace.push_back("\n    2) Initial Facts: " + joinFactsList(init) + "\n");
+  }
+  trace.push_back("\n    3) Goal: " + goal + "\n");
+  trace.push_back("\nPART 2. Trace\n");
+  std::set<std::string> inProgress;
+  std::vector<std::string> proof;
+  bool ok = proveGoal(goal, 0, inProgress, proof);
+  if (ok) {
+    finalPath = proof;
+  }
+  return ok;
+}
+
+void BackwardChaining::printResults() {
+  
+}
