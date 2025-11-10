@@ -35,3 +35,7 @@ std::vector<std::string> BackwardChaining::buildFactsList(const std::string &cur
     return list;
   }
 }
+
+bool BackwardChaining::proveGoal(const std::string &currentGoal, int depth, std::set<std::string> &inProgress, std::vector<std::string> &outPath) {
+  std::string indent = getIndent(depth);
+}
