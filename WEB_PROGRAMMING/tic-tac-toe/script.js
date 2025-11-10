@@ -1,7 +1,7 @@
 const form = document.getElementById("players-input");
 const player1Input = document.getElementById("player1-name");
 const player2Input = document.getElementById("player2-name");
-const textHolder = document.querySelector(".text-holer");
+const textHolder = document.querySelector(".text-holder");
 const whosPlaying = document.querySelector(".whos-playing .player");
 const cells = document.querySelectorAll(".cell");
 
@@ -11,17 +11,19 @@ let currentPlayer = "";
 let gameActive = false;
 let board = ["", "", "", "", "", "", "", "", ""];
 
-// START GAME
+// --- START GAME ---
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  player1 = player1Input.ariaValueMax.trim();
-  player2 = player2Input.ariaValueMax.trim();
+  player1 = player1Input.value.trim();
+  player2 = player2Input.value.trim();
   if (!player1 || !player2) return;
+
   textHolder.textContent = "Game started!";
   whosPlaying.textContent = `${player1} playing (X)`;
   currentPlayer = player1;
   gameActive = true;
 
+  // limpiar tablero
   board.fill("");
   cells.forEach((cell) => {
     cell.textContent = "";
@@ -29,27 +31,35 @@ form.addEventListener("submit", (e) => {
   });
 });
 
+// --- GAME LOGIC ---
 cells.forEach((cell, index) => {
   cell.addEventListener("click", () => {
     if (!gameActive || cell.textContent !== "") return;
+
     const symbol = currentPlayer === player1 ? "X" : "O";
     cell.textContent = symbol;
     board[index] = symbol;
+
     if (checkWinner(symbol)) {
       showResult(`${currentPlayer} wins!`);
       gameActive = false;
       return;
     }
+
     if (board.every((c) => c !== "")) {
       showResult("It's a draw!");
       gameActive = false;
       return;
     }
+
+    // Cambiar turno
     currentPlayer = currentPlayer === player1 ? player2 : player1;
-    whosPlaying.textContent = `${currentPlayer} playing (${currentPlayer === player1 ? "X" : "O"})`;
+    whosPlaying.textContent =
+      `${currentPlayer} playing (${currentPlayer === player1 ? "X" : "O"})`;
   });
 });
 
+// --- CHECK WINNER ---
 function checkWinner(symbol) {
   const winPatterns = [
     [0, 1, 2],
@@ -61,11 +71,13 @@ function checkWinner(symbol) {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
   return winPatterns.some(
     (pattern) => pattern.every((index) => board[index] === symbol)
   );
-};
+}
 
+// --- SHOW RESULT POPUP ---
 function showResult(message) {
   const overlay = document.createElement("div");
   overlay.style.position = "fixed";
@@ -112,6 +124,7 @@ function showResult(message) {
   });
 }
 
+// --- RESET GAME ---
 function resetGame() {
   board.fill("");
   cells.forEach((cell) => {
