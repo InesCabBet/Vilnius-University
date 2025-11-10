@@ -32,7 +32,7 @@ divides number
 dividesCom :: Integer -> [Integer]
 dividesCom 0 = []
 dividesCom n 
-  | n > 0 = [x | x <- [1 .. n], n `mod` x == 0]
+  | n > 0 = [x | x <- [1 .. div n 2], n `mod` x == 0] ++ [n]
   | otherwise = [x | x <- [-abs n .. (-1)] ++ [1 .. abs n], n `mod` x == 0]
 
 --- Ex2 -> Prime number
@@ -45,7 +45,7 @@ isPrime n
 prefix :: String -> String -> Bool
 prefix string1 string2 
   | length(string1) > length(string2) = error "First string must be shorter than second string. \nWe evaluate wether s1 is a prefix of s2."
-  | otherwise = take (length string1) string2 == string1
+  | otherwise = take (length string1) string2 == string1 -- x == y && prefix tail(string1) tail(string2) 
 
 --- Ex3 -> substring
 substring :: String -> String -> Bool
@@ -76,14 +76,14 @@ capitalise str = [toUpper c | c <- str, isAlpha c]
 --- Exercise 6
 itemTotal :: [(String, Float)] -> [(String, Float)]
 itemTotal [] = []
-itemTotal ((name, price): xs) = (name, totalFor name xs) : itemTotal remaining
+itemTotal ((name, price): xs) = (name, totalFor name xs) : itemTotal remaining -- ls@
   where
     totalFor n items = price + sum [p | (m, p) <- items, m == n]
     remaining = [(m, p) | (m, p) <- xs, m /= name]
 
 --- Exercise 6 -> discounts
 itemDiscount :: String -> Integer -> [(String, Float)] -> [(String, Float)]
-itemDiscount item disc basket = [(name, newPrice name price) | (name, price) <- basket]
+itemDiscount item disc basket = [(name, newPrice name price) | (name, price) <- basket] -- if else
   where
     newPrice name price
       | name == item = price * (1 - fromInteger disc / 100)
