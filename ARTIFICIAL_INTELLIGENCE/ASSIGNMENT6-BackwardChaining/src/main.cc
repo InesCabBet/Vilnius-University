@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Enter input file name: ";
     getline(std::cin, filename);
   }
+  filename = "../" + filename;
   std::vector<Rule> rules;
   std::vector<std::string> facts;
   std::string goal;

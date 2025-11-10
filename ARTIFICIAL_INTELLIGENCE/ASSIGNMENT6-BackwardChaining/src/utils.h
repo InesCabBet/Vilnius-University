@@ -21,8 +21,8 @@
 
 std::string trim(const std::string &str);
 std::vector<std::string> split(const std::string &str, char delimiter);
-static inline std::string stepTag(int n, int width = 5);
-static inline std::string joinFactsList(const std::vector<std::string> &items);
+std::string stepTag(int n, int width = 9);
+std::string joinFactsList(const std::vector<std::string> &items);
 
 class Rule {
   public:

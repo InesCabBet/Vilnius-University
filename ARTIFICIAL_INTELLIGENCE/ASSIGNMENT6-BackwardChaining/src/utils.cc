@@ -28,14 +28,14 @@ std::vector<std::string> split(const std::string &str, char delimiter) {
   return tokens;
 }
 
-static inline std::string stepTag(int n, int width = 5) {
+std::string stepTag(int n, int width) {
   std::ostringstream os;
-  os << std::setw(9) << std::setfill(' ') << std::right << n;
+  os << std::setw(width) << std::setfill(' ') << std::right << n;
   return os.str();
 }
 
 // helper: join facts come "A" | "A and B" | "A and B, C, D"
-static inline std::string joinFactsList(const std::vector<std::string> &items) {
+std::string joinFactsList(const std::vector<std::string> &items) {
   if (items.empty())
     return "";
   if (items.size() == 1)
