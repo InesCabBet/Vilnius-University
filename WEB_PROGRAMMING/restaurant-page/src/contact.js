@@ -7,9 +7,9 @@ export function loadContact() {
 
   const info = document.createElement("p");
   info.innerHTML = `
-    Email: odin@valhalla.com<br>
-    Phone: +1 (555) ASGARD<br>
-    Address: 1 Bifrost Way, Asgard<br><br>
+    Email: icb3rg@gmail.com<br>
+    Phone: +34 731 371 890 SPAIN<br>
+    Address: 13 La Laguna Way, Tenerife<br><br>
     Open daily 9AM – 11PM (or until Ragnarök)
   `;
   info.style.fontSize = "1.4rem";
