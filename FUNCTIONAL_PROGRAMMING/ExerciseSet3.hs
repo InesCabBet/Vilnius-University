@@ -72,12 +72,15 @@ takeWithoutExceed max = go 0
 
 --- Exercise 6 -> function total
 total :: (Integer -> Integer) -> Integer -> Integer
-total func num = foldr (\x acc -> func x + acc) 0 [0..n]
+total func num = foldr (\x acc -> func x + acc) 0 [0..num]
 
 --- Exercise 7 -> function iter
 iterRec :: Integer -> (a -> a) -> (a -> a)
 iterRec num func
   | num <= 0 = id
-  | otherwise = func . iter (num - 1) func
+  | otherwise = func . iterRec (num - 1) func
 
-
+iterFold :: Integer -> (a -> a) -> (a -> a)
+iterFold num func
+  | num <= 0 = id
+  | otherwise = foldr (.) id (replicate (fromInteger num) func)
