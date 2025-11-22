@@ -3,7 +3,7 @@
   FUNCTIONAL PROGRAMMING
   @author Inés Cabrera Betancor
   @initialDate 16 NOV 2025
-  @finalDate   NOV 2025
+  @finalDate 22 NOV 2025
   @brief Third assignment using haskell and structures and function application
 -}
 
@@ -45,7 +45,7 @@ myAny :: (a -> Bool) -> [a] -> Bool
 myAny condition elements = foldr (||) False (map condition elements)
 
 myAll :: (a -> Bool) -> [a] -> Bool
-myAll condition elements = foldr (&&) False (map condition elements)
+myAll condition elements = foldr (&&) True (map condition elements)
 
 --- Exercise 3 -> Redifine unzip
 myUnzip :: [(a, b)] -> ([a], [b])
