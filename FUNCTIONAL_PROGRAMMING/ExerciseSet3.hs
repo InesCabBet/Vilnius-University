@@ -70,7 +70,14 @@ takeWithoutExceed max = go 0
       | current + x > max = current
       | otherwise = go (current + x) list
 
---- Exercise 6 -> funtion total
+--- Exercise 6 -> function total
 total :: (Integer -> Integer) -> Integer -> Integer
 total func num = foldr (\x acc -> func x + acc) 0 [0..n]
+
+--- Exercise 7 -> function iter
+iterRec :: Integer -> (a -> a) -> (a -> a)
+iterRec num func
+  | num <= 0 = id
+  | otherwise = func . iter (num - 1) func
+
 
