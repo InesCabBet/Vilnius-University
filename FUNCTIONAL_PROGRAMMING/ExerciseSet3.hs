@@ -22,12 +22,12 @@ overlaps (Circle r1 c1) (Circle r2 c2) = distance c1 c2 < (r1 + r2)
 overlaps (Rectangle w1 h1 (x1, y1)) (Rectangle w2 h2 (x2, y2)) =
   abs (x1 - x2) < (w1/2 + w2/2) && abs (y1 - y2) < (h1/2 + h2/2)
 
-overlaps (Circle r (cx, cy)) (Rectangle w h (rx, ry)) = (cx - closestX) ^ 2 + (cy - closestY) ^ 2 r*r 
+overlaps (Circle r (cx, cy)) (Rectangle w h (rx, ry)) = (cx - closestX)^2 + (cy - closestY)^2 < r*r 
   where
     halfW = w / 2
     halfH =  h / 2
     closestX = max (rx - halfW) (min cx (rx + halfW))
-    closestX = max (ry - halfH) (min cy (ry + halfH))
+    closestY = max (ry - halfH) (min cy (ry + halfH))
 
 overlaps rect@(Rectangle _ _ _) circ@(Circle _ _) =
   overlaps circ rect
@@ -69,3 +69,8 @@ takeWithoutExceed max = go 0
     go current (x : list)
       | current + x > max = current
       | otherwise = go (current + x) list
+
+--- Exercise 6 -> funtion total
+total :: (Integer -> Integer) -> Integer -> Integer
+total func num = foldr (\x acc -> func x + acc) 0 [0..n]
+
