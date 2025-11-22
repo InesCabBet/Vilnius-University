@@ -47,5 +47,12 @@ myAll :: (a -> Bool) -> [a] -> Bool
 myAll condition elements = foldr (&&) False (map condition elements)
 
 --- Exercise 3 -> Redifine unzip
-unzip :: [(a, b)] -> ([a], [b])
-unzip = foldr (\(x, y) (list1, list2) -> (x : list1, y : list2)) ([], [])
+myUnzip :: [(a, b)] -> ([a], [b])
+myUnzip = foldr (\(x, y) (list1, list2) -> (x : list1, y : list2)) ([], [])
+
+--- Exercise 4 -> Redine length
+lengthMap :: [a] -> Int
+lengthMap = sum . map (\_ -> 1)
+
+lengthFold :: [a] -> Int
+lengthFold = foldr (\_ acc -> acc + 1) 0
