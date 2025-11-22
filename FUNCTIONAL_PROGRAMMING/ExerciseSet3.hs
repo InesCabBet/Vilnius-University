@@ -46,4 +46,6 @@ myAny condition elements = foldr (||) False (map condition elements)
 myAll :: (a -> Bool) -> [a] -> Bool
 myAll condition elements = foldr (&&) False (map condition elements)
 
----
+--- Exercise 3 -> Redifine unzip
+unzip :: [(a, b)] -> ([a], [b])
+unzip = foldr (\(x, y) (list1, list2) -> (x : list1, y : list2)) ([], [])
