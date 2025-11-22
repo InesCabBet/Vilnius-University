@@ -40,6 +40,7 @@ myAnyFilter condition elements = not (null (filter condition elements))
 myAllFilter:: (a -> Bool) -> [a] -> Bool
 myAllFilter condition elements = length (filter condition elements) == length elements
 
+--- VERSION 2 -> usinf foldr
 myAny :: (a -> Bool) -> [a] -> Bool
 myAny condition elements = foldr (||) False (map condition elements)
 
@@ -56,3 +57,15 @@ lengthMap = sum . map (\_ -> 1)
 
 lengthFold :: [a] -> Int
 lengthFold = foldr (\_ acc -> acc + 1) 0
+
+--- Exercise 5 -> function definition
+ff :: Integer -> [Integer] -> Integer
+ff max = takeWithoutExceed max . map (*10) . filter(>= 0)
+
+takeWithoutExceed :: Integer -> [Integer] -> Integer
+takeWithoutExceed max = go 0
+  where
+    go current [] = current
+    go current (x : list)
+      | current + x > max = current
+      | otherwise = go (current + x) list
