@@ -84,3 +84,7 @@ iterFold :: Integer -> (a -> a) -> (a -> a)
 iterFold num func
   | num <= 0 = id
   | otherwise = foldr (.) id (replicate (fromInteger num) func)
+
+--- Exercise 8 -> function split
+splits :: [a] -> [([a], [a])]
+splits xs = [ splitAt i xs | i <- [0 .. length xs] ]
