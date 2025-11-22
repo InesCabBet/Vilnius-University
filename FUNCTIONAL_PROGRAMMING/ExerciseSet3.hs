@@ -9,7 +9,7 @@
 
 module ExerciseSet3 where
 
---- Exercise 1 
+--- Exercise 1 -> Overlaping shapes
 data Shape = Circle Float (Float, Float) | Rectangle Float Float (Float, Float)
   deriving (Show, Ord, Eq)
 
@@ -32,5 +32,18 @@ overlaps (Circle r (cx, cy)) (Rectangle w h (rx, ry)) = (cx - closestX) ^ 2 + (c
 overlaps rect@(Rectangle _ _ _) circ@(Circle _ _) =
   overlaps circ rect
 
---- Exercise 2 
+--- Exercise 2 -> Redifining standard functions
+--- VERSION 1 - using filter
+myAnyFilter:: (a -> Bool) -> [a] -> Bool
+myAnyFilter condition elements = not (null (filter condition elements))
 
+myAllFilter:: (a -> Bool) -> [a] -> Bool
+myAllFilter condition elements = length (filter condition elements) == length elements
+
+myAny :: (a -> Bool) -> [a] -> Bool
+myAny condition elements = foldr (||) False (map condition elements)
+
+myAll :: (a -> Bool) -> [a] -> Bool
+myAll condition elements = foldr (&&) False (map condition elements)
+
+---
