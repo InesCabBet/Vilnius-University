@@ -60,7 +60,7 @@ def evaluate_model(model, model_name, is_scaling_required=False):
     test_error = 1 - accuracy
     
     results[model_name] = test_error
-    print(f"{model_name} Error de Prueba: {test_error:.4f}")
+    print(f"{model_name} Test Error: {test_error:.4f}")
 
 # --- 3. Entrenamiento y Evaluación de Modelos ---
 
