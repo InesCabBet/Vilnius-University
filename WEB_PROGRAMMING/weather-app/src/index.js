@@ -150,29 +150,6 @@ function displayWeather(data) {
                     </div>
                 </div>
             </div>
-
-            <div class="forecast">
-                <h3>3-Day Forecast</h3>
-                <div class="forecast-grid">
-                    ${forecast.forecastday.map(day => `
-                        <div class="forecast-card">
-                            <p class="date">${formatDate(day.date)}</p>
-                            <img src="https:${day.day.condition.icon}" alt="${day.day.condition.text}" class="forecast-icon">
-                            <p class="forecast-condition">${day.day.condition.text}</p>
-                            <div class="temps">
-                                <div class="temp-box max">
-                                    <p class="label">Max</p>
-                                    <p class="temp-value">${Math.round(day.day.maxtemp_c)}°</p>
-                                </div>
-                                <div class="temp-box min">
-                                    <p class="label">Min</p>
-                                    <p class="temp-value">${Math.round(day.day.mintemp_c)}°</p>
-                                </div>
-                            </div>
-                            <p class="rain-chance">Rain: ${day.day.daily_chance_of_rain}%</p>
-                        </div>
-                    `).join('')}
-                </div>
             </div>
         </div>
     `;
