@@ -2,10 +2,6 @@
 ## Inés Cabrera Betancor
 
 ## COMANDOS PARA PROYECTOS MAS AVANZADOS
-### Crear la carpeta del proyecto
-mkdir todo-list
-cd todo-list
-
 ### Inicializar npm
 npm init -y
 
