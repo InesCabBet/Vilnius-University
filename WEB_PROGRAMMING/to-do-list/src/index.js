@@ -52,7 +52,16 @@ class TodoList {
     init() {
         // Si no hay proyectos, crear el proyecto Inbox por defecto
         if (this.projects.length === 0) {
-            this.addProject('Inbox');
+            const inboxProject = this.addProject('Inbox');
+            this.currentProject = inboxProject.id;
+        } else {
+            // Asegurarse de que currentProject es válido
+            const inboxProject = this.projects.find(p => p.name === 'Inbox');
+            if (inboxProject) {
+                this.currentProject = inboxProject.id;
+            } else if (this.projects.length > 0) {
+                this.currentProject = this.projects[0].id;
+            }
         }
 
         this.setupEventListeners();
@@ -109,15 +118,32 @@ class TodoList {
         if (project) {
             project.addTask(task);
             this.saveToLocalStorage();
+            console.log(`Task "${title}" added to project "${project.name}" (ID: ${projectId})`);
+        } else {
+            console.error(`Project with ID ${projectId} not found`);
         }
     }
 
-    updateTask(taskId, projectId, updates) {
-        const project = this.getProject(projectId);
-        if (project) {
-            const task = project.getTask(taskId);
+    updateTask(taskId, oldProjectId, updates) {
+        const oldProject = this.getProject(oldProjectId);
+        if (oldProject) {
+            const task = oldProject.getTask(taskId);
             if (task) {
-                Object.assign(task, updates);
+                // Si el proyecto cambió, mover la tarea al nuevo proyecto
+                if (updates.project && updates.project !== oldProjectId) {
+                    const newProject = this.getProject(updates.project);
+                    if (newProject) {
+                        // Remover del proyecto antiguo
+                        oldProject.removeTask(taskId);
+                        // Actualizar datos de la tarea
+                        Object.assign(task, updates);
+                        // Añadir al nuevo proyecto
+                        newProject.addTask(task);
+                    }
+                } else {
+                    // Solo actualizar los datos
+                    Object.assign(task, updates);
+                }
                 this.saveToLocalStorage();
             }
         }
@@ -148,30 +174,19 @@ class TodoList {
             project.tasks.map(task => ({ ...task, projectName: project.name }))
         );
 
-        switch (this.currentProject) {
-            case 'inbox':
-                const inboxProject = this.projects.find(p => p.name === 'Inbox');
-                return inboxProject ? inboxProject.tasks.map(task => ({ ...task, projectName: 'Inbox' })) : [];
-            case 'today':
-                return allTasks.filter(task => isToday(parseISO(task.dueDate)));
-            case 'week':
-                return allTasks.filter(task => isThisWeek(parseISO(task.dueDate), { weekStartsOn: 1 }));
-            default:
-                const project = this.getProject(this.currentProject);
-                return project ? project.tasks.map(task => ({ ...task, projectName: project.name })) : [];
+        if (this.currentProject === 'today') {
+            return allTasks.filter(task => isToday(parseISO(task.dueDate)));
+        } else if (this.currentProject === 'week') {
+            return allTasks.filter(task => isThisWeek(parseISO(task.dueDate), { weekStartsOn: 1 }));
+        } else {
+            // Para proyectos específicos (incluido Inbox)
+            const project = this.getProject(this.currentProject);
+            return project ? project.tasks.map(task => ({ ...task, projectName: project.name })) : [];
         }
     }
 
     // Event Listeners
     setupEventListeners() {
-        // Navigation
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                this.currentProject = e.target.dataset.project;
-                this.render();
-            });
-        });
-
         // Add task button
         document.getElementById('add-task-btn').addEventListener('click', () => {
             this.openTaskModal();
@@ -229,6 +244,9 @@ class TodoList {
         const form = document.getElementById('task-form');
         const modalTitle = document.getElementById('modal-title');
 
+        // Populate project select FIRST
+        this.populateProjectSelect();
+
         if (task) {
             // Edit mode
             modalTitle.textContent = 'Edit Task';
@@ -244,15 +262,12 @@ class TodoList {
             form.reset();
             this.currentEditingTask = null;
             
-            // Set default project
+            // Set default project to current project
             const projectSelect = document.getElementById('task-project');
-            if (this.currentProject !== 'today' && this.currentProject !== 'week') {
-                projectSelect.value = this.currentProject;
-            }
+            projectSelect.value = this.currentProject;
+            console.log(`Modal opened for project: ${this.currentProject}`);
+            console.log(`Project select value set to: ${projectSelect.value}`);
         }
-
-        // Populate project select
-        this.populateProjectSelect();
         
         modal.classList.add('show');
     }
@@ -272,15 +287,19 @@ class TodoList {
 
         if (this.currentEditingTask) {
             // Update existing task
-            this.updateTask(this.currentEditingTask.id, this.currentEditingTask.project, {
-                title,
-                description,
-                dueDate,
-                priority,
-                project: projectId
-            });
+            this.updateTask(
+                this.currentEditingTask.id, 
+                this.currentEditingTask.project, 
+                {
+                    title,
+                    description,
+                    dueDate,
+                    priority,
+                    project: projectId
+                }
+            );
         } else {
-            // Add new task
+            // Add new task - asegurarse de usar el projectId seleccionado
             this.addTask(title, description, dueDate, priority, projectId);
         }
 
@@ -327,12 +346,9 @@ class TodoList {
     }
 
     renderNavigation() {
-        // Update active nav button
-        document.querySelectorAll('.nav-btn').forEach(btn => {
+        // Update active nav button - pero ahora solo para los botones especiales
+        document.querySelectorAll('.default-projects .nav-btn').forEach(btn => {
             btn.classList.remove('active');
-            if (btn.dataset.project === this.currentProject) {
-                btn.classList.add('active');
-            }
         });
 
         // Render custom projects
@@ -340,25 +356,26 @@ class TodoList {
         projectsList.innerHTML = '';
 
         this.projects.forEach(project => {
-            if (project.name !== 'Inbox') {
-                const projectItem = document.createElement('div');
-                projectItem.className = 'project-item';
-                if (this.currentProject === project.id) {
-                    projectItem.classList.add('active');
+            const projectItem = document.createElement('div');
+            projectItem.className = 'project-item';
+            if (this.currentProject === project.id) {
+                projectItem.classList.add('active');
+            }
+
+            const isInbox = project.name === 'Inbox';
+            projectItem.innerHTML = `
+                <span>${project.name}</span>
+                ${!isInbox ? `<button class="delete-project" data-project-id="${project.id}">×</button>` : ''}
+            `;
+
+            projectItem.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('delete-project')) {
+                    this.currentProject = project.id;
+                    this.render();
                 }
+            });
 
-                projectItem.innerHTML = `
-                    <span>${project.name}</span>
-                    <button class="delete-project" data-project-id="${project.id}">×</button>
-                `;
-
-                projectItem.addEventListener('click', (e) => {
-                    if (!e.target.classList.contains('delete-project')) {
-                        this.currentProject = project.id;
-                        this.render();
-                    }
-                });
-
+            if (!isInbox) {
                 const deleteBtn = projectItem.querySelector('.delete-project');
                 deleteBtn.addEventListener('click', () => {
                     if (confirm(`Delete project "${project.name}"?`)) {
@@ -366,9 +383,9 @@ class TodoList {
                         this.render();
                     }
                 });
-
-                projectsList.appendChild(projectItem);
             }
+
+            projectsList.appendChild(projectItem);
         });
     }
 
@@ -400,7 +417,7 @@ class TodoList {
                     <div class="task-meta">
                         <span>📅 ${formattedDate}</span>
                         <span>🏷️ ${task.priority}</span>
-                        ${this.currentProject === 'today' || this.currentProject === 'week' ? `<span>📁 ${task.projectName}</span>` : ''}
+                        <span>📁 ${task.projectName}</span>
                     </div>
                 </div>
                 <div class="task-actions">
@@ -437,21 +454,8 @@ class TodoList {
 
     renderProjectTitle() {
         const titleElement = document.getElementById('project-title');
-        
-        switch (this.currentProject) {
-            case 'inbox':
-                titleElement.textContent = 'Inbox';
-                break;
-            case 'today':
-                titleElement.textContent = 'Today';
-                break;
-            case 'week':
-                titleElement.textContent = 'This Week';
-                break;
-            default:
-                const project = this.getProject(this.currentProject);
-                titleElement.textContent = project ? project.name : 'Unknown';
-        }
+        const project = this.getProject(this.currentProject);
+        titleElement.textContent = project ? project.name : 'Unknown';
     }
 }
 
