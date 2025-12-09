@@ -10,7 +10,7 @@
 module ExerciseSet3 where
 
 --- Exercise 1 -> Overlaping shapes
-data Shape = Circle Float (Float, Float) | Rectangle Float Float (Float, Float)
+data Shape = Circle Float (Float, Float) | Rectangle Float Float (Float, Float) |
   deriving (Show, Ord, Eq)
 
 distance :: (Float, Float) -> (Float, Float) -> Float
@@ -45,7 +45,7 @@ myAny :: (a -> Bool) -> [a] -> Bool
 myAny condition elements = foldr (||) False (map condition elements)
 
 myAll :: (a -> Bool) -> [a] -> Bool
-myAll condition elements = foldr (&&) True (map condition elements)
+myAll condition elements = foldr (\x y -> x && y) True (map condition elements)
 
 --- Exercise 3 -> Redifine unzip
 myUnzip :: [(a, b)] -> ([a], [b])
