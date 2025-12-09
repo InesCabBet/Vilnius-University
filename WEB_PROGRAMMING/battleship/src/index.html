@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship Game</title>
+</head>
+<body>
+    <div class="container">
+        <h1>🚢 Battleship</h1>
+        
+        <div id="message">¡Tu turno! Ataca el tablero del enemigo</div>
+        
+        <div class="boards-container">
+            <div class="board-wrapper">
+                <h2>Tu Tablero</h2>
+                <div id="player-board" class="board"></div>
+            </div>
+            
+            <div class="board-wrapper">
+                <h2>Tablero Enemigo</h2>
+                <div id="computer-board" class="board"></div>
+            </div>
+        </div>
+        
+        <button id="restart-btn">Nuevo Juego</button>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="cell ship"></div>
+                <span>Tu barco</span>
+            </div>
+            <div class="legend-item">
+                <div class="cell hit"></div>
+                <span>Impacto</span>
+            </div>
+            <div class="legend-item">
+                <div class="cell miss"></div>
+                <span>Fallo</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

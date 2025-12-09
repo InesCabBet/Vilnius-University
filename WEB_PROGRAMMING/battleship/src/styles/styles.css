@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#message {
+  font-size: 18px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  color: #333;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boards-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.board-wrapper h2 {
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 20px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 2px;
+  background-color: #ddd;
+  padding: 2px;
+  border: 2px solid #999;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cell:hover {
+  background-color: #bbdefb;
+  transform: scale(1.05);
+}
+
+.cell.ship {
+  background-color: #a5d6a7;
+  border-color: #66bb6a;
+}
+
+.cell.hit {
+  background-color: #ef5350;
+  border-color: #c62828;
+  cursor: not-allowed;
+}
+
+.cell.hit::after {
+  content: '💥';
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell.miss {
+  background-color: #90a4ae;
+  border-color: #546e7a;
+  cursor: not-allowed;
+}
+
+.cell.miss::after {
+  content: '💧';
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#restart-btn {
+  padding: 12px 30px;
+  font-size: 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 30px;
+}
+
+#restart-btn:hover {
+  background-color: #1976d2;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend-item .cell {
+  width: 30px;
+  height: 30px;
+  cursor: default;
+}
+
+.legend-item span {
+  font-size: 14px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .boards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: 32px;
+  }
+}
