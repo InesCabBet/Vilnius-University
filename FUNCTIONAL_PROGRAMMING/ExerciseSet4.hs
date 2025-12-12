@@ -58,3 +58,13 @@ goldbach n
     satisfies e = or [p + q == e | p <- takeWhile (<e) primes, q <- takeWhile (<e) primes]
 
 --- Exercise 6 -> infinte data streams
+data Stream a = Cons a (Stream a)
+
+streamToList :: Stream a -> [a]
+streamToList (Cons x xs) = x : streamToList xs
+
+streamIterate :: (a -> a) -> a -> Stream a
+streamIterate f x = Cons x (streamIterate  f (f x))
+
+streamInterleave :: Stream a -> Stream a -> Stream a
+streamInterleave (Cons x xs) ys = Cons x (streamInterleave ys xs)
