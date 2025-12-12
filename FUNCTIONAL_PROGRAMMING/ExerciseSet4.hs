@@ -55,6 +55,6 @@ goldbach n
   | n `mod` 2 /= 0 = False
   | otherwise = and [satisfies e | e <- [4,6..n]]
   where
-    satisfies e = not null  [(p,q) | p <- takeWhile (<e) primes, q <- takeWhile (<e) primes, p + q == e]
+    satisfies e = or [p + q == e | p <- takeWhile (<e) primes, q <- takeWhile (<e) primes]
 
 --- Exercise 6 -> infinte data streams
