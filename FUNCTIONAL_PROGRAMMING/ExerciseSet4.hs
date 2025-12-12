@@ -23,3 +23,24 @@ occurs x (Gnode xs) = any (occurs x) xs
 mapGTree :: (a -> b) -> GTree a -> GTree b
 mapGTree f (Leaf x) = Leaf (f x)
 mapGTree f (Gnode xs) = Gnode (map (mapGTree f) xs)
+
+--- Exercise 2 -> generalised expression
+data Expr a = Lit a | EVar Var | Op (Ops a) [Expr a]
+type Ops a = [a] -> a
+type Var = Char
+
+--- Exercise 3 -> extend regular expression
+option, plus :: RegExp -> RegExp
+
+--- Exercise 4 -> maybe type
+data Result a = OK a | Error String
+
+composeResult :: (a -> Result b) -> (b -> Result c) -> (a -> Result c)
+composeResult f g x = check (f x)
+  where
+    check (Error msg) = Error msg
+    check (OK y) = g y
+
+--- Exercise 5 -> Goldbach conjeture
+
+--- Exercise 6 -> infinte data streams
