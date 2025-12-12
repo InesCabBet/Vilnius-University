@@ -42,5 +42,19 @@ composeResult f g x = check (f x)
     check (OK y) = g y
 
 --- Exercise 5 -> Goldbach conjeture
+primes :: [Integer]
+primes = sieve [2 ..]
+
+sieve :: [Integer] -> [Integer]
+sieve (x:xs) =
+  x : sieve [y | y <- xs, y `mod` x > 0]
+
+goldbach :: Integer -> Bool
+goldbach n 
+  | n < 4 = False
+  | n `mod` 2 /= 0 = False
+  | otherwise = and [satisfies e | e <- [4,6..n]]
+  where
+    satisfies e = not null  [(p,q) | p <- takeWhile (<e) primes, q <- takeWhile (<e) primes, p + q == e]
 
 --- Exercise 6 -> infinte data streams
