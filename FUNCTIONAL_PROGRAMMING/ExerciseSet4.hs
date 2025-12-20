@@ -28,9 +28,34 @@ mapGTree f (Gnode xs) = Gnode (map (mapGTree f) xs)
 data Expr a = Lit a | EVar Var | Op (Ops a) [Expr a]
 type Ops a = [a] -> a
 type Var = Char
+type Valuation a = [(Var, a)]
+
+eval :: Valuation a -> Expr a -> a
 
 --- Exercise 3 -> extend regular expression
+type RegExp = String -> Bool
+
+epsilon :: RegExp
+epsilon = (=="")
+
+char :: Char -> RegExp
+char ch = (==[ch])
+
+(|||) :: RegExp -> RegExp -> RegExp
+e1 ||| e2 = \x -> e1 x || e2 x
+
+(<.>) :: RegExp -> RegExp -> RegExp
+e1 <.> e2 = \x -> or [e1 y && e2 z | (y,z) <- splits x]
+
+star :: RegExp -> RegExp
+star p = epsilon ||| (p <.> star p)
+
+splits :: [a] -> [([a], [a])]
+splits xs = [ splitAt i xs | i <- [0 .. length xs] ]
+
 option, plus :: RegExp -> RegExp
+option p = epsilon ||| p
+plus p = p <.> star p
 
 --- Exercise 4 -> maybe type
 data Result a = OK a | Error String
