@@ -41,6 +41,8 @@ lookupVar :: Var -> Valuation a -> a
 lookupVar v ((x,val): xs)
   | v == x = val
   | otherwise = lookupVar v xs
+
+
 --- Exercise 3 -> extend regular expression
 type RegExp = String -> Bool
 
