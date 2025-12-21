@@ -3,7 +3,7 @@
   FUNCTIONAL PROGRAMMING
   @author Inés Cabrera Betancor
   @initialDate 03 DEC 2025
-  @finalDate xx DEC 2025
+  @finalDate 20 DEC 2025
   @brief Fourth assignment using haskell and structures and function application
 -}
 
@@ -25,13 +25,22 @@ mapGTree f (Leaf x) = Leaf (f x)
 mapGTree f (Gnode xs) = Gnode (map (mapGTree f) xs)
 
 --- Exercise 2 -> generalised expression
+--- x = literal value | env = valuation | es subexpression
 data Expr a = Lit a | EVar Var | Op (Ops a) [Expr a]
 type Ops a = [a] -> a
 type Var = Char
 type Valuation a = [(Var, a)]
 
 eval :: Valuation a -> Expr a -> a
+eval _ (Lit x) = x 
+eval env (EVar v) = lookupVar v env
+eval env (Op f es) = f (map (eval env) es)
 
+--- v = variable name | x = current variable | val = current value
+lookupVar :: Var -> Valuation a -> a
+lookupVar v ((x,val): xs)
+  | v == x = val
+  | otherwise = lookupVar v xs
 --- Exercise 3 -> extend regular expression
 type RegExp = String -> Bool
 
