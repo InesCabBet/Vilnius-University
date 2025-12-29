@@ -28,7 +28,7 @@ from torchmetrics import R2Score, MeanSquaredError
 try:
     from ISLP import load_data
     from ISLP.torch import SimpleDataModule, SimpleModule, ErrorTracker
-    print("✓ ISLP imported successfully")
+    print("ISLP imported successfully")
 except ImportError:
     print("ERROR: ISLP not installed. Run: pip install ISLP")
     exit(1)
@@ -289,7 +289,7 @@ print(f"\nTask C (RNN with Weekday):")
 print(f"  R² = {results_c[0]['test_r2']:.4f}")
 
 print("\n" + "=" * 80)
-print("✓ ANALYSIS COMPLETE!")
+print("ANALYSIS COMPLETE!")
 print("=" * 80)
 print("\nLogs saved in ./logs/ directory")
 print("Check the academic paper for detailed commentary on results.")
