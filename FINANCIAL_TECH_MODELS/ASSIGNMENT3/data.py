@@ -1,17 +1,10 @@
 """
 @author Inés Cabrera Betancor
 @date 26 DEC 2025
-
-NYSE Time Series Analysis - Lab 10.9.6 Modified
-Based on Introduction to Statistical Learning with Python (ISLP)
-Chapter 10: Deep Learning - Recurrent Neural Networks
-
 Tasks:
 a) Refit flattened ANN with 12-level month factor and weekday dummy
 b) Fit linear AR model using flattened ANN and compare with LinearRegression
 c) Adjust RNN to include weekday dummy
-
-Requirements: torch, pandas, numpy, sklearn, ISLP, pytorch_lightning
 """
 
 import numpy as np
