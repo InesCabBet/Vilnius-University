@@ -38,6 +38,7 @@ eval env (Op f es) = f (map (eval env) es)
 
 --- v = variable name | x = current variable | val = current value
 lookupVar :: Var -> Valuation a -> a
+lookupVar _ [] = error "error"
 lookupVar v ((x,val): xs)
   | v == x = val
   | otherwise = lookupVar v xs
